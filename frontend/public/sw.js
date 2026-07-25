@@ -1,21 +1,13 @@
-const CACHE_NAME = 'maison-heritage-cache-v1';
-const ASSETS_TO_CACHE = [
-  './',
-  './index.html',
-  './manifest.json'
-];
+// Service Worker — Maison Heritage PWA
+// Strategy: Network-First (toujours chercher les données fraîches)
+const CACHE_NAME = 'maison-heritage-v30';
 
-// Install Service Worker and cache essential shells
-self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS_TO_CACHE);
-    })
-  );
+// Install: pré-cache minimal, activation immédiate
+self.addEventListener('install', () => {
   self.skipWaiting();
 });
 
-// Activate event (clean up old caches)
+// Activate: supprimer TOUS les anciens caches
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
@@ -31,29 +23,29 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// Cache-First or Network-Fallback Fetch Strategy
+// Fetch: Network-first strategy (pas de cache-first qui bloque les mises à jour)
 self.addEventListener('fetch', (event) => {
-  event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      if (cachedResponse) {
-        return cachedResponse;
-      }
-      return fetch(event.request).then((response) => {
-        // Return if not a valid response or if it's a POST request (not cacheable)
-        if (!response || response.status !== 200 || response.type !== 'basic' || event.request.method !== 'GET') {
-          return response;
-        }
-        
-        // Cache newly requested GET resources on the fly
-        const responseToCache = response.clone();
-        caches.open(CACHE_NAME).then((cache) => {
-          cache.put(event.request, responseToCache);
-        });
+  // Ne cache que les requêtes GET
+  if (event.request.method !== 'GET') return;
 
+  // Ne PAS intercepter les requêtes API
+  if (event.request.url.includes('/api/')) return;
+
+  event.respondWith(
+    fetch(event.request)
+      .then((response) => {
+        // Cloner et mettre en cache la réponse fraîche
+        if (response && response.status === 200) {
+          const responseToCache = response.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, responseToCache);
+          });
+        }
         return response;
-      }).catch(() => {
-        // Offline fallback if network fails
-      });
-    })
+      })
+      .catch(() => {
+        // Fallback au cache uniquement si le réseau échoue
+        return caches.match(event.request);
+      })
   );
 });

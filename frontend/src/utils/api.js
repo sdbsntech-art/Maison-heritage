@@ -25,7 +25,7 @@ export async function isApiAvailable(force = false) {
   apiCheckPromise = (async () => {
     try {
       const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 4000);
+      const timeout = setTimeout(() => controller.abort(), 1500);
       const res = await fetch(`${API_BASE}/health`, {
         signal: controller.signal,
         headers: { Accept: 'application/json' },

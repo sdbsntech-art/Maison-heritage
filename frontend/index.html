@@ -88,12 +88,22 @@
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
 
-    <!--  Service Worker PWA -->
+    <!--  Service Worker PWA — Purge ancien cache puis réinstalle -->
     <script>
       if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
-          navigator.serviceWorker.register('/sw.js')
-            .catch(function() { /* silently fail if SW not available */ });
+        // Étape 1: Purger TOUS les anciens caches (résout l'écran bleu)
+        if ('caches' in window) {
+          caches.keys().then(function(names) {
+            names.forEach(function(name) { caches.delete(name); });
+          });
+        }
+        // Étape 2: Unregister les anciens SW puis installer le nouveau
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+          var unregPromises = registrations.map(function(reg) { return reg.unregister(); });
+          Promise.all(unregPromises).then(function() {
+            navigator.serviceWorker.register('/sw.js')
+              .catch(function() { /* silently fail */ });
+          });
         });
       }
     </script>
