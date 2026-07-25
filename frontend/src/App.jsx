@@ -20,6 +20,11 @@ export default function App() {
   const [apiOnline, setApiOnline] = React.useState(false);
   const [cartItems, setCartItems] = React.useState([]);
   const [cartOpen, setCartOpen] = React.useState(false);
+  const [cartFabPosition, setCartFabPosition] = React.useState(() => ({
+    left: 24,
+    top: typeof window !== 'undefined' ? Math.max(24, window.innerHeight - 136) : 24,
+  }));
+  const dragStateRef = React.useRef({ active: false, pointerId: null, startX: 0, startY: 0, originLeft: 0, originTop: 0, moved: false });
   
   // Boutique Filters
   const [searchQuery, setSearchQuery] = React.useState('');
@@ -83,6 +88,67 @@ export default function App() {
     setCartItems(items);
     localStorage.setItem("maison_heritage_cart", JSON.stringify(items));
   };
+
+  const clampFabPosition = React.useCallback((left, top) => {
+    const buttonSize = 56;
+    const maxLeft = typeof window !== 'undefined' ? Math.max(12, window.innerWidth - buttonSize - 12) : 12;
+    const maxTop = typeof window !== 'undefined' ? Math.max(12, window.innerHeight - buttonSize - 12) : 12;
+    return {
+      left: Math.min(Math.max(left, 12), maxLeft),
+      top: Math.min(Math.max(top, 12), maxTop),
+    };
+  }, []);
+
+  const handleFabPointerDown = (event) => {
+    if (event.button !== 0) return;
+    dragStateRef.current = {
+      active: true,
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+      originLeft: cartFabPosition.left,
+      originTop: cartFabPosition.top,
+      moved: false,
+    };
+    event.currentTarget.setPointerCapture?.(event.pointerId);
+  };
+
+  const handleFabPointerMove = (event) => {
+    if (!dragStateRef.current.active || event.pointerId !== dragStateRef.current.pointerId) return;
+    const deltaX = event.clientX - dragStateRef.current.startX;
+    const deltaY = event.clientY - dragStateRef.current.startY;
+    if (Math.abs(deltaX) > 3 || Math.abs(deltaY) > 3) {
+      dragStateRef.current.moved = true;
+    }
+    const nextPosition = clampFabPosition(dragStateRef.current.originLeft + deltaX, dragStateRef.current.originTop + deltaY);
+    setCartFabPosition(nextPosition);
+  };
+
+  const handleFabPointerUp = (event) => {
+    if (!dragStateRef.current.active || event.pointerId !== dragStateRef.current.pointerId) return;
+    if (!dragStateRef.current.moved) {
+      setCartOpen(true);
+    }
+    dragStateRef.current = { active: false, pointerId: null, startX: 0, startY: 0, originLeft: 0, originTop: 0, moved: false };
+  };
+
+  const handleFabClick = (event) => {
+    if (dragStateRef.current.moved) {
+      event.preventDefault();
+      event.stopPropagation();
+      dragStateRef.current.moved = false;
+      return;
+    }
+    setCartOpen(true);
+  };
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      setCartFabPosition((current) => clampFabPosition(current.left, current.top));
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [clampFabPosition]);
 
   // Sync products list when Admin panel modifies them
   const handleProductsChange = async () => {
@@ -483,15 +549,19 @@ export default function App() {
         onRemoveFromCart={handleRemoveFromCart}
       />
 
-      {/* ★ Bouton Panier fixe — bas à droite, au-dessus du WhatsApp */}
+      {/* Bouton Panier déplaçable — au-dessus du WhatsApp */}
       <button
-        onClick={() => setCartOpen(true)}
+        onPointerDown={handleFabPointerDown}
+        onPointerMove={handleFabPointerMove}
+        onPointerUp={handleFabPointerUp}
+        onPointerCancel={handleFabPointerUp}
+        onClick={handleFabClick}
         aria-label={`Ouvrir le panier — ${cartItems.reduce((a, i) => a + i.quantity, 0)} article(s)`}
         title="Mon Panier"
         style={{
           position: 'fixed',
-          bottom: '96px',
-          right: '24px',
+          left: `${cartFabPosition.left}px`,
+          top: `${cartFabPosition.top}px`,
           backgroundColor: 'var(--color-primary)',
           border: '2px solid var(--color-accent)',
           color: 'var(--color-accent)',
@@ -503,9 +573,10 @@ export default function App() {
           justifyContent: 'center',
           boxShadow: '0 4px 20px rgba(197,168,128,0.25)',
           zIndex: 90,
-          cursor: 'pointer',
-          transition: 'all 0.3s cubic-bezier(0.34,1.56,0.64,1)',
-          position: 'fixed',
+          cursor: 'grab',
+          transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+          touchAction: 'none',
+          userSelect: 'none',
         }}
         className="cart-fab-fixed"
       >
