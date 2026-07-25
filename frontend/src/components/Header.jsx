@@ -89,8 +89,19 @@ export default function Header({ cartCount, onCartClick, onAdminClick, activeTab
             ))}
           </nav>
 
-          {/* Actions — Menu Burger uniquement (dédié navigation) */}
+          {/* Actions — Panier + menu burger */}
           <div className="header-actions">
+            <button
+              className="cart-pill"
+              onClick={() => onCartClick?.()}
+              aria-label="Voir le panier"
+              title="Voir le panier"
+            >
+              <ShoppingBag size={18} />
+              <span className="cart-pill-label">Panier</span>
+              {cartCount > 0 && <span className="cart-pill-count">{cartCount}</span>}
+            </button>
+
             <button
               className={`burger-btn${drawerOpen ? ' open' : ''}`}
               onClick={() => setDrawerOpen(prev => !prev)}

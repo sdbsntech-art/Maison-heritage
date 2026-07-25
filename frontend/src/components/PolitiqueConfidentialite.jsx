@@ -32,7 +32,7 @@ Nous ne vendons, ne louons et ne partageons jamais vos données avec des tiers �
     title: 'Protection de vos données',
     content: `La sécurité de vos informations personnelles est notre priorité. Nous mettons en place des mesures techniques et organisationnelles pour protéger vos données contre tout accès non autorisé, perte ou divulgation.
 
-Notre site est hébergé sur des plateformes sécurisées (Netlify et Hostinger) qui garantissent un haut niveau de protection. Les communications entre votre navigateur et notre site sont chiffrées via HTTPS.
+Notre site est hébergé sur des plateformes sécurisées (Vercel en local et Hostinger en production) qui garantissent un haut niveau de protection. Les communications entre votre navigateur et notre site sont chiffrées via HTTPS.
 
 Les mots de passe de notre espace administrateur sont chiffrés avec des algorithmes robustes (PBKDF2 + sel aléatoire) et ne sont jamais stockés en clair.`,
   },
@@ -188,6 +188,13 @@ export default function PolitiqueConfidentialite() {
             >
               <i className="fa-brands fa-whatsapp" style={{ fontSize: '15px' }}></i> WhatsApp : +221 77 490 37 13
             </a>
+            <a
+              href="tel:+221773624539"
+              className="btn-primary"
+              style={{ textDecoration: 'none', display: 'inline-flex', gap: '0.5rem', alignItems: 'center', fontSize: 'var(--fs-sm)' }}
+            >
+              <i className="fa-solid fa-phone" style={{ fontSize: '15px' }}></i> Appel : +221 77 362 45 39
+            </a>
           </div>
         </div>
 
@@ -205,9 +212,9 @@ export default function PolitiqueConfidentialite() {
           <p style={{ fontWeight: 600, color: 'var(--text-soft)', marginBottom: '0.5rem' }}>Informations légales</p>
           <p><strong style={{ color: 'var(--color-accent)' }}>Boutique :</strong> Maison Heritage by Bint Khalifa</p>
           <p><strong style={{ color: 'var(--color-accent)' }}>Localisation :</strong> Dakar, Sénégal</p>
-          <p><strong style={{ color: 'var(--color-accent)' }}>Hébergeurs :</strong> Netlify &amp; Hostinger</p>
+          <p><strong style={{ color: 'var(--color-accent)' }}>Hébergeurs :</strong> Vercel en local &amp; Hostinger en production</p>
           <p><strong style={{ color: 'var(--color-accent)' }}>Développeur :</strong> Zayel</p>
-          <p><strong style={{ color: 'var(--color-accent)' }}>Contact :</strong> +221 77 490 37 13 (WhatsApp)</p>
+          <p><strong style={{ color: 'var(--color-accent)' }}>Contact :</strong> +221 77 362 45 39</p>
           <p style={{ marginTop: '0.75rem', fontStyle: 'italic' }}>
             Cette politique de confidentialité peut être mise à jour à tout moment. Nous vous invitons à la consulter régulièrement.
           </p>
