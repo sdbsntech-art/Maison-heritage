@@ -10,6 +10,14 @@
     <meta name="author" content="Maison Heritage by Bint Khalifa" />
     <meta name="copyright" content="© 2025 Maison Heritage by Bint Khalifa. Tous droits réservés." />
     <meta name="robots" content="index, follow" />
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const copyrightMeta = document.querySelector('meta[name="copyright"]');
+        if (copyrightMeta) {
+          copyrightMeta.setAttribute('content', `© ${new Date().getFullYear()} Maison Heritage by Bint Khalifa. Tous droits réservés.`);
+        }
+      });
+    </script>
     <meta name="theme-color" content="#00215a" />
     <meta name="color-scheme" content="dark" />
     <meta name="google-site-verification" content="H_kLTLBoI28OwgkWF_g-VI4-tm0PZvMlRFGPhiVvNVU" />

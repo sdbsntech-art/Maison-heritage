@@ -116,7 +116,7 @@ export default function Footer({ onNavClick, onAdminClick }) {
               Service Client
             </h4>
             <p style={{ color: 'var(--text-muted)', marginBottom: '1.2rem', lineHeight: '1.6' }}>
-              Des questions ou une commande directe ? Contactez-nous par WhatsApp.
+              Des questions ou une commande directe ? Contactez-nous par WhatsApp, appel ou autre moyen de contact.
             </p>
             <a 
               href="https://wa.me/221774903713" 
@@ -166,10 +166,13 @@ export default function Footer({ onNavClick, onAdminClick }) {
           >
             &copy; {currentYear} Maison Heritage by Bint Khalifa. Tous droits réservés.
           </span>
-          <span style={{ marginLeft: '1rem', color: 'var(--text-muted)' }}>Développeur: Zayel – Hébergement: Netlify &amp; Hostinger</span>
-          <span style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
-            <span>Qualité &amp; Authenticité</span>
-            <span>Sécurité &amp; Intégrité</span>
+          <span style={{ marginLeft: '1rem', color: 'var(--text-muted)' }}>
+            Développeur: Zayel – Hébergement: Vercel en local, Hostinger en production
+          </span>
+          <span style={{ display: 'flex', gap: '1.5rem', alignItems: 'center', flexWrap: 'wrap' }}>
+            <span>Jours: Lundi au Dimanche</span>
+            <span>Horaires: 09:00 – 00:00</span>
+            <span>Disponible en ligne</span>
           </span>
         </div>
       </div>

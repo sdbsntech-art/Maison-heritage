@@ -13,6 +13,7 @@ const NAV_ITEMS = [
 export default function Header({ cartCount, onCartClick, onAdminClick, activeTab, setActiveTab }) {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [scrolled, setScrolled] = React.useState(false);
+  const currentYear = new Date().getFullYear();
 
   React.useEffect(() => {
     const onResize = () => {
@@ -194,7 +195,7 @@ export default function Header({ cartCount, onCartClick, onAdminClick, activeTab
 
         <div className="drawer-footer">
           <p className="drawer-footer-text">
-            © 2025 <span className="drawer-footer-brand">Maison Heritage</span>
+            © {currentYear} <span className="drawer-footer-brand">Maison Heritage</span>
             <br />
             <span style={{ fontSize: '0.6rem', opacity: 0.5 }}>Livraison partout au Sénégal</span>
           </p>
