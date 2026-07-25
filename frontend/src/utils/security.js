@@ -30,8 +30,8 @@ export function sanitizeText(str) {
 export function sanitizeImageUrl(url) {
   if (!url || typeof url !== 'string') return '';
   const cleaned = url.trim();
-  // Seuls http et https sont autorisés pour les images externes
-  const allowedProtocols = /^https?:\/\//i;
+  // Autorise les URLs absolues (http/https) et les chemins locaux relatifs (/assets/...)
+  const allowedProtocols = /^(https?:\/\/|\/|\.\/)/i;
   if (!allowedProtocols.test(cleaned)) return '';
   // Longueur max 2048 caractères
   if (cleaned.length > 2048) return '';
