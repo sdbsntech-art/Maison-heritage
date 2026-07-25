@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+    <!--  SEO & Identité -->
+    <title>Maison Heritage | Parfums, Montres & Accessoires d'Exception — Dakar</title>
+    <meta name="description" content="Bienvenue chez Maison Heritage by Bint Khalifa. Parfums d'exception, montres intemporelles, chapelets authentiques, bracelets et chaussures raffinées. Livraison partout au Sénégal." />
+    <meta name="author" content="Maison Heritage by Bint Khalifa" />
+    <meta name="copyright" content="© 2025 Maison Heritage by Bint Khalifa. Tous droits réservés." />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#00215a" />
+    <meta name="color-scheme" content="dark" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Maison Heritage | Luxe & Authenticité à Dakar" />
+    <meta property="og:description" content="Parfums Oud, montres, chapelets et accessoires d'exception. Maison Heritage by Bint Khalifa — Dakar, Sénégal." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_SN" />
+
+    
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline';
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
+      font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:;
+      img-src 'self' data: blob: https: http:;
+      connect-src 'self' https://wa.me;
+      frame-src 'none';
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self';
+      upgrade-insecure-requests;
+    " />
+
+    <!-- Anti-clickjacking -->
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <!-- Empêche le sniffing MIME -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <!-- Referrer minimal -->
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <!-- Empêche la détection de permissions navigateur non autorisées -->
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()" />
+
+    <!-- PWA Manifest  -->
+    <link rel="manifest" href="/manifest.json" />
+
+    <!--  Fonts — Preconnect pour performance  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+
+    <!-- Favicon — Logo MH -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+    
+    <style>
+      
+      @media print {
+        html::before {
+          content: "© 2025 Maison Heritage by Bint Khalifa — Reproduction strictement interdite.";
+          display: block;
+          font-size: 11px;
+          color: rgba(0,33,90,0.35);
+          text-align: center;
+          padding: 8px;
+          border-bottom: 1px dashed rgba(0,33,90,0.2);
+          margin-bottom: 12px;
+          font-family: Georgia, serif;
+          letter-spacing: 0.05em;
+        }
+        .site-header, .whatsapp-float, footer,
+        .burger-btn, .cart-btn, .nav-drawer {
+          display: none !important;
+        }
+      }
+      /* Premier rendu sans flash blanc */
+      #root { min-height: 100dvh; background: #040914; }
+    </style>
+  </head>
+  <body>
+    <!-- Fallback sans JS -->
+    <noscript>
+      <div style="font-family:Georgia,serif;text-align:center;padding:4rem 2rem;background:#040914;color:#c5a880;min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1rem;">
+        <h1 style="font-size:2rem;">Maison Heritage</h1>
+        <p style="color:#94a3b8;">JavaScript est requis pour accéder à la boutique. Veuillez l'activer dans votre navigateur.</p>
+        <a href="https://wa.me/221774903713" style="color:#c5a880;text-decoration:underline;">Contactez-nous sur WhatsApp</a>
+      </div>
+    </noscript>
+
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+
+    <!--  Service Worker PWA -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js')
+            .catch(function() { /* silently fail if SW not available */ });
+        });
+      }
+    </script>
+  </body>
+</html>

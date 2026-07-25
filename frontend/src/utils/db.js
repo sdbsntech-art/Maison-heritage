@@ -1,0 +1,1215 @@
+// Maison Heritage — Base de données produits (LocalStorage + API Express.js)
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+import * as api from './api';
+
+const INITIAL_PRODUCTS = [
+  {
+    "id": 1,
+    "name": "Musc Impérial Dibor",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°1.",
+    "imageUrl": "/assets/parfums/dibor_parfum_1.jpg",
+    "isFeatured": true,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 2,
+    "name": "Oud Royal Bint Khalifa",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°2.",
+    "imageUrl": "/assets/parfums/dibor_parfum_2.jpg",
+    "isFeatured": true,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 3,
+    "name": "Elixir Rose de Nuit",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°3.",
+    "imageUrl": "/assets/parfums/dibor_parfum_3.jpg",
+    "isFeatured": true,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 4,
+    "name": "Santal Suprême Luxury",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°4.",
+    "imageUrl": "/assets/parfums/dibor_parfum_4.jpg",
+    "isFeatured": true,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 5,
+    "name": "Amber Gold Prestige",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°5.",
+    "imageUrl": "/assets/parfums/dibor_parfum_5.jpg",
+    "isFeatured": true,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 6,
+    "name": "Jasmin Privé Edition",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°6.",
+    "imageUrl": "/assets/parfums/dibor_parfum_6.jpg",
+    "isFeatured": true,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 7,
+    "name": "Oud & Safran Impérial",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°7.",
+    "imageUrl": "/assets/parfums/dibor_parfum_7.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 8,
+    "name": "Cuir Noir d'Arabie",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°8.",
+    "imageUrl": "/assets/parfums/dibor_parfum_8.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 9,
+    "name": "Musc Secret de Dibor",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°9.",
+    "imageUrl": "/assets/parfums/dibor_parfum_9.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 10,
+    "name": "Fleur de Coton Nectar",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°10.",
+    "imageUrl": "/assets/parfums/dibor_parfum_10.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 11,
+    "name": "Oud Al Amir Supreme",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°11.",
+    "imageUrl": "/assets/parfums/dibor_parfum_11.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 12,
+    "name": "Nuit d'Orient Luxury",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°12.",
+    "imageUrl": "/assets/parfums/dibor_parfum_12.jpg",
+    "isFeatured": true,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 13,
+    "name": "Velours Solaire",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°13.",
+    "imageUrl": "/assets/parfums/dibor_parfum_13.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 14,
+    "name": "Soleil d'Or Khalifa",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°14.",
+    "imageUrl": "/assets/parfums/dibor_parfum_14.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 15,
+    "name": "Oud Wood Extrait",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°15.",
+    "imageUrl": "/assets/parfums/dibor_parfum_15.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 16,
+    "name": "Rose & Oud Seduction",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°16.",
+    "imageUrl": "/assets/parfums/dibor_parfum_16.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 17,
+    "name": "Baccarat Royal Sillage",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°17.",
+    "imageUrl": "/assets/parfums/dibor_parfum_17.jpg",
+    "isFeatured": true,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 18,
+    "name": "Vanille d'Or Impériale",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°18.",
+    "imageUrl": "/assets/parfums/dibor_parfum_18.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 19,
+    "name": "Musc Tahara Pure",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°19.",
+    "imageUrl": "/assets/parfums/dibor_parfum_19.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 20,
+    "name": "Oud Amber Intense",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°20.",
+    "imageUrl": "/assets/parfums/dibor_parfum_20.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 21,
+    "name": "Santal Blanc Prestige",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°21.",
+    "imageUrl": "/assets/parfums/dibor_parfum_21.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 22,
+    "name": "L'Héritage Oud Gold",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°22.",
+    "imageUrl": "/assets/parfums/dibor_parfum_22.jpg",
+    "isFeatured": true,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 23,
+    "name": "Sillage Mystique",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°23.",
+    "imageUrl": "/assets/parfums/dibor_parfum_23.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 24,
+    "name": "Dibor Collection Privée",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°24.",
+    "imageUrl": "/assets/parfums/dibor_parfum_24.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 25,
+    "name": "Rose Ambrée Khalifa",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°25.",
+    "imageUrl": "/assets/parfums/dibor_parfum_25.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 26,
+    "name": "Oud Al Sultan",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°26.",
+    "imageUrl": "/assets/parfums/dibor_parfum_26.jpg",
+    "isFeatured": true,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 27,
+    "name": "Musc & Oud Dibor N°27",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°27.",
+    "imageUrl": "/assets/parfums/dibor_parfum_27.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 28,
+    "name": "Musc & Oud Dibor N°28",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°28.",
+    "imageUrl": "/assets/parfums/dibor_parfum_28.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 29,
+    "name": "Musc & Oud Dibor N°29",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°29.",
+    "imageUrl": "/assets/parfums/dibor_parfum_29.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 30,
+    "name": "Musc & Oud Dibor N°30",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°30.",
+    "imageUrl": "/assets/parfums/dibor_parfum_30.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 31,
+    "name": "Musc & Oud Dibor N°31",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°31.",
+    "imageUrl": "/assets/parfums/dibor_parfum_31.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 32,
+    "name": "Musc & Oud Dibor N°32",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°32.",
+    "imageUrl": "/assets/parfums/dibor_parfum_32.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 33,
+    "name": "Musc & Oud Dibor N°33",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°33.",
+    "imageUrl": "/assets/parfums/dibor_parfum_33.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 34,
+    "name": "Musc & Oud Dibor N°34",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°34.",
+    "imageUrl": "/assets/parfums/dibor_parfum_34.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 35,
+    "name": "Musc & Oud Dibor N°35",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°35.",
+    "imageUrl": "/assets/parfums/dibor_parfum_35.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 36,
+    "name": "Musc & Oud Dibor N°36",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°36.",
+    "imageUrl": "/assets/parfums/dibor_parfum_36.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 37,
+    "name": "Musc & Oud Dibor N°37",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°37.",
+    "imageUrl": "/assets/parfums/dibor_parfum_37.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 38,
+    "name": "Musc & Oud Dibor N°38",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°38.",
+    "imageUrl": "/assets/parfums/dibor_parfum_38.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 39,
+    "name": "Musc & Oud Dibor N°39",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°39.",
+    "imageUrl": "/assets/parfums/dibor_parfum_39.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 40,
+    "name": "Musc & Oud Dibor N°40",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°40.",
+    "imageUrl": "/assets/parfums/dibor_parfum_40.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 41,
+    "name": "Musc & Oud Dibor N°41",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°41.",
+    "imageUrl": "/assets/parfums/dibor_parfum_41.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 42,
+    "name": "Musc & Oud Dibor N°42",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°42.",
+    "imageUrl": "/assets/parfums/dibor_parfum_42.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 43,
+    "name": "Musc & Oud Dibor N°43",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°43.",
+    "imageUrl": "/assets/parfums/dibor_parfum_43.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 44,
+    "name": "Musc & Oud Dibor N°44",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°44.",
+    "imageUrl": "/assets/parfums/dibor_parfum_44.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 45,
+    "name": "Musc & Oud Dibor N°45",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°45.",
+    "imageUrl": "/assets/parfums/dibor_parfum_45.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 46,
+    "name": "Musc & Oud Dibor N°46",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°46.",
+    "imageUrl": "/assets/parfums/dibor_parfum_46.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 47,
+    "name": "Musc & Oud Dibor N°47",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°47.",
+    "imageUrl": "/assets/parfums/dibor_parfum_47.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 48,
+    "name": "Musc & Oud Dibor N°48",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°48.",
+    "imageUrl": "/assets/parfums/dibor_parfum_48.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 49,
+    "name": "Musc & Oud Dibor N°49",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°49.",
+    "imageUrl": "/assets/parfums/dibor_parfum_49.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 50,
+    "name": "Musc & Oud Dibor N°50",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°50.",
+    "imageUrl": "/assets/parfums/dibor_parfum_50.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 51,
+    "name": "Musc & Oud Dibor N°51",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°51.",
+    "imageUrl": "/assets/parfums/dibor_parfum_51.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 52,
+    "name": "Musc & Oud Dibor N°52",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°52.",
+    "imageUrl": "/assets/parfums/dibor_parfum_52.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 53,
+    "name": "Signature Dibor Parfums",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°53.",
+    "imageUrl": "/assets/parfums/dibor_parfum_53.jpg",
+    "isFeatured": true,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 54,
+    "name": "Parfum Arvea Impérial",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Parfum d'exception Arvea, fraîcheur et élégance.",
+    "imageUrl": "/assets/parfums/arvea.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 55,
+    "name": "Boss Intense Luxury",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Signature masculine puissante et charismatique.",
+    "imageUrl": "/assets/parfums/boss.jpg",
+    "isFeatured": true,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 56,
+    "name": "Chanel Élixir d'Orient",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Intemporel floral et boisé d'une grâce infinie.",
+    "imageUrl": "/assets/parfums/chanel.jpg",
+    "isFeatured": true,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 57,
+    "name": "Dior Sauvage Privé",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Fraîcheur sauvage et notes ambrées intenses.",
+    "imageUrl": "/assets/parfums/dior.jpg",
+    "isFeatured": true,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 58,
+    "name": "Guerlain Shalimar d'Or",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Légende orientales aux effluves vanillées.",
+    "imageUrl": "/assets/parfums/guerlain.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 59,
+    "name": "La Vie Est Belle Élixir",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Sillage gourmand d'iris et de praline.",
+    "imageUrl": "/assets/parfums/la vie est belle.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 60,
+    "name": "Mon Paris Royal",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Passion florale au cœur de datura et patchouli.",
+    "imageUrl": "/assets/parfums/mon paris must.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 61,
+    "name": "My Way Nectar Solaire",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Bouquet de fleurs blanches et fleur d'oranger.",
+    "imageUrl": "/assets/parfums/my way.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 62,
+    "name": "Oud Al Ameer Royal",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Oud princier enrichi d'épices précieuses.",
+    "imageUrl": "/assets/parfums/oudd ameer.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 63,
+    "name": "Oud & Yass Luxury",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Composition rare aux essences orientales.",
+    "imageUrl": "/assets/parfums/oudd et yass oud luxury.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 64,
+    "name": "Oud Parfum d'Or",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Flacon d'or et sillage boisé majestueux.",
+    "imageUrl": "/assets/parfums/oudd parfum d'or.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 65,
+    "name": "Oud Classic Impérial",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Oud traditionnel pour les amateurs de parfum pur.",
+    "imageUrl": "/assets/parfums/oudd.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 66,
+    "name": "Collection Niche Rare",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Haute parfumerie d'auteur.",
+    "imageUrl": "/assets/parfums/parfum de niche.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 67,
+    "name": "Essence Suprême",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Extrait concentré de senteurs rares.",
+    "imageUrl": "/assets/parfums/parfum.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 68,
+    "name": "Coffret Prestige Parfums",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Assortiment d'exception des meilleures fragrances.",
+    "imageUrl": "/assets/parfums/parfums.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 69,
+    "name": "Sauvage Extrait",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Puissance boisée et épicée intense.",
+    "imageUrl": "/assets/parfums/sauvages parfum.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 70,
+    "name": "Scandal Sillage Noir",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Miel addictif et gardénia envoûtant.",
+    "imageUrl": "/assets/parfums/scandal.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 71,
+    "name": "Musc Secret d'Orient",
+    "category": "Parfums",
+    "price": 0,
+    "description": "Douceur mystique de musc oriental.",
+    "imageUrl": "/assets/parfums/secret.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 72,
+    "name": "Horizon Homme",
+    "category": "Montres",
+    "price": 0,
+    "description": "Cadran épuré, boîtier en acier inoxydable et bracelet en cuir noir cousu main.",
+    "imageUrl": "/assets/montres/horizon montre homme.jpg",
+    "isFeatured": true,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 73,
+    "name": "Rolex Submariner Classic",
+    "category": "Montres",
+    "price": 0,
+    "description": "Le grand classique de l'horlogerie de luxe avec cadran noir tournant.",
+    "imageUrl": "/assets/montres/rolex.jpg",
+    "isFeatured": true,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 74,
+    "name": "Montre Chronomètre Course",
+    "category": "Montres",
+    "price": 0,
+    "description": "Conçue pour le sport de haut niveau, chronométrage précis et étanche.",
+    "imageUrl": "/assets/montres/montre chronometre de course a pied.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 75,
+    "name": "Curren Chronographe Cuir",
+    "category": "Montres",
+    "price": 0,
+    "description": "Design élégant et moderne pour les hommes raffinés.",
+    "imageUrl": "/assets/montres/curren.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 76,
+    "name": "Geneva Équipage Doré",
+    "category": "Montres",
+    "price": 0,
+    "description": "Boîtier doré et finition soignée pour toutes occasions.",
+    "imageUrl": "/assets/montres/geneva.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 77,
+    "name": "Montre Sport Tactique",
+    "category": "Montres",
+    "price": 0,
+    "description": "Résistance extrême aux chocs et multifonctions.",
+    "imageUrl": "/assets/montres/montre 2.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 78,
+    "name": "Montre Squelette Mécanique",
+    "category": "Montres",
+    "price": 0,
+    "description": "Mouvement automatique visible à travers le cadran.",
+    "imageUrl": "/assets/montres/montre.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 79,
+    "name": "Montres Duo Couple Heritage",
+    "category": "Montres",
+    "price": 0,
+    "description": "Ensemble assorti pour lui et pour elle.",
+    "imageUrl": "/assets/montres/montres.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 80,
+    "name": "Naviforce Chrono Acier",
+    "category": "Montres",
+    "price": 0,
+    "description": "Bracelet en acier inoxydable et cadran multifonction.",
+    "imageUrl": "/assets/montres/naviforce.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 81,
+    "name": "Skmei Digital Sport",
+    "category": "Montres",
+    "price": 0,
+    "description": "Affichage numérique clair et robustesse à toute épreuve.",
+    "imageUrl": "/assets/montres/skmei.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 82,
+    "name": "Bracelet Cuir Tressé Homme",
+    "category": "Bracelets",
+    "price": 0,
+    "description": "Cuir véritable tressé avec fermoir magnétique en acier.",
+    "imageUrl": "/assets/bracelets/bracelet cuir tresser pour homme.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 83,
+    "name": "Cadena Cuir & Acier Noir",
+    "category": "Bracelets",
+    "price": 0,
+    "description": "Design urbain affirmé en cuir noir et plaque gravée.",
+    "imageUrl": "/assets/bracelets/cadena cuir noir homme.jpg",
+    "isFeatured": true,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 84,
+    "name": "Trio Bracelets Dorés Luxe",
+    "category": "Bracelets",
+    "price": 0,
+    "description": "Ensemble de 3 bracelets dorés étincelants.",
+    "imageUrl": "/assets/bracelets/3 bracelet en or.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 85,
+    "name": "Bracelet Perles Œil de Tigre",
+    "category": "Bracelets",
+    "price": 0,
+    "description": "Perles naturelles aux reflets dorés et marrons d'une grande beauté.",
+    "imageUrl": "/assets/bracelets/bracelet oeil de tigre.jpg",
+    "isFeatured": true,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 86,
+    "name": "Bracelet Pierre de Lave Sauvage",
+    "category": "Bracelets",
+    "price": 0,
+    "description": "Perles volcaniques poreuses pour diffuser vos huiles essentielles.",
+    "imageUrl": "/assets/bracelets/bracelet pierre de lave.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 87,
+    "name": "Bracelet Or Rose Féminin",
+    "category": "Bracelets",
+    "price": 0,
+    "description": "Finesse et délicatesse pour les poignets élégants.",
+    "imageUrl": "/assets/bracelets/bracelet or rose.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 88,
+    "name": "Bracelet Perles d'Ébène",
+    "category": "Bracelets",
+    "price": 0,
+    "description": "Bois précieux d'ébène sculpté avec précision.",
+    "imageUrl": "/assets/bracelets/bracelet perles ebene.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 89,
+    "name": "Bracelet Argent Sterling 925",
+    "category": "Bracelets",
+    "price": 0,
+    "description": "Argent massif poli pour une brillance durable.",
+    "imageUrl": "/assets/bracelets/bracelet argent.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 90,
+    "name": "Bracelet Cuir Marron Vintage",
+    "category": "Bracelets",
+    "price": 0,
+    "description": "Cuir vieilli patiné pour un look authentique.",
+    "imageUrl": "/assets/bracelets/bracelet cuir marron.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 91,
+    "name": "Coffret Duo Bracelets Amoureux",
+    "category": "Bracelets",
+    "price": 0,
+    "description": "Symbolisez votre union avec ces deux bracelets assortis.",
+    "imageUrl": "/assets/bracelets/bracelet duo.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 92,
+    "name": "Tasbih Bois de Santal Ébène",
+    "category": "Chapelets",
+    "price": 0,
+    "description": "99 grains en bois de santal parfumé et séparateurs en ébène.",
+    "imageUrl": "/assets/chapelets/chapelet bois de santal.jpg",
+    "isFeatured": true,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 93,
+    "name": "Tasbih Ambre Royal 99 Perles",
+    "category": "Chapelets",
+    "price": 0,
+    "description": "Perles d'ambre chaud translucides avec pompon de soie dorée.",
+    "imageUrl": "/assets/chapelets/chapelet ambre.jpg",
+    "isFeatured": true,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 94,
+    "name": "Tasbih Argent Massif Gravé",
+    "category": "Chapelets",
+    "price": 0,
+    "description": "Chapelet précieux 33 perles avec breloque calligraphiée en argent.",
+    "imageUrl": "/assets/chapelets/chapelet argent.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 95,
+    "name": "Tasbih Perles de Nacre d'Orient",
+    "category": "Chapelets",
+    "price": 0,
+    "description": "Reflets irisés magiques pour une méditation sereine.",
+    "imageUrl": "/assets/chapelets/chapelet nacre.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 96,
+    "name": "Tasbih Pierre de Lune Étoilée",
+    "category": "Chapelets",
+    "price": 0,
+    "description": "Perles laiteuses aux reflets bleutés apaisants.",
+    "imageUrl": "/assets/chapelets/chapelet pierre de lune.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 97,
+    "name": "Tasbih Turquoise Véritable",
+    "category": "Chapelets",
+    "price": 0,
+    "description": "Bleu turquoise veiné de brun, pompon assorti.",
+    "imageUrl": "/assets/chapelets/chapelet turquoise.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 98,
+    "name": "Tasbih Agate Noire Mat",
+    "category": "Chapelets",
+    "price": 0,
+    "description": "Élégance sobre et toucher doux de l'agate mat.",
+    "imageUrl": "/assets/chapelets/chapelet agate noir.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 99,
+    "name": "Tasbih Lapis Lazuli Oriental",
+    "category": "Chapelets",
+    "price": 0,
+    "description": "Bleu azur profond tacheté d'or de pyrite, avec pompon doré.",
+    "imageUrl": "/assets/chapelets/chapelet 9.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  },
+  {
+    "id": 100,
+    "name": "Tasbih Traditionnel Perles",
+    "category": "Chapelets",
+    "price": 0,
+    "description": "Tasbih universel 99 grains en perles lisses.",
+    "imageUrl": "/assets/chapelets/chapelet.jpg",
+    "isFeatured": false,
+    "inStock": true,
+    "isPromo": false
+  }
+];
+
+const PRODUCTS_KEY = 'maison_heritage_products';
+const DB_VERSION_KEY = 'maison_heritage_db_version';
+const CURRENT_VERSION = '20.0'; // Forcer la réinitialisation locale
+
+export const getStoredProducts = () => {
+  const storedVersion = localStorage.getItem(DB_VERSION_KEY);
+  if (storedVersion !== CURRENT_VERSION) {
+    localStorage.setItem(PRODUCTS_KEY, JSON.stringify(INITIAL_PRODUCTS));
+    localStorage.setItem(DB_VERSION_KEY, CURRENT_VERSION);
+    return INITIAL_PRODUCTS;
+  }
+
+  const products = localStorage.getItem(PRODUCTS_KEY);
+  if (!products) {
+    localStorage.setItem(PRODUCTS_KEY, JSON.stringify(INITIAL_PRODUCTS));
+    return INITIAL_PRODUCTS;
+  }
+
+  try {
+    return JSON.parse(products);
+  } catch {
+    localStorage.setItem(PRODUCTS_KEY, JSON.stringify(INITIAL_PRODUCTS));
+    return INITIAL_PRODUCTS;
+  }
+};
+
+export const saveProducts = (products) => {
+  localStorage.setItem(PRODUCTS_KEY, JSON.stringify(products));
+};
+
+export const addProduct = (product) => {
+  const products = getStoredProducts();
+  const newProduct = {
+    ...product,
+    id: products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1,
+    price: product.price ? Number(product.price) : 0,
+    imageUrl: product.imageUrl || '',
+    isFeatured: Boolean(product.isFeatured),
+    inStock: Boolean(product.inStock),
+    isPromo: Boolean(product.isPromo),
+  };
+  products.push(newProduct);
+  saveProducts(products);
+  return newProduct;
+};
+
+export const updateProduct = (updatedProduct) => {
+  const products = getStoredProducts();
+  const index = products.findIndex(p => p.id === Number(updatedProduct.id));
+  if (index !== -1) {
+    products[index] = {
+      ...products[index],
+      ...updatedProduct,
+      price: updatedProduct.price ? Number(updatedProduct.price) : 0,
+      imageUrl: updatedProduct.imageUrl || '',
+      isFeatured: Boolean(updatedProduct.isFeatured),
+      inStock: Boolean(updatedProduct.inStock),
+      isPromo: Boolean(updatedProduct.isPromo),
+    };
+    saveProducts(products);
+    return products[index];
+  }
+  return null;
+};
+
+export const deleteProduct = (id) => {
+  const products = getStoredProducts();
+  const filtered = products.filter(p => p.id !== Number(id));
+  saveProducts(filtered);
+  return true;
+};
+
+// ── API Express.js (avec fallback localStorage) ───────────────────
+
+export async function loadProducts() {
+  try {
+    if (await api.isApiAvailable()) {
+      const products = await api.getProducts();
+      if (Array.isArray(products) && products.length > 0) {
+        saveProducts(products);
+        return products;
+      }
+    }
+  } catch (err) {
+    console.warn('[Maison Heritage] API produits indisponible — mode local.', err);
+  }
+  return getStoredProducts();
+}
+
+export async function persistProduct(product, isEditing = false) {
+  if (await api.isApiAvailable() && api.getToken()) {
+    if (isEditing) {
+      const updated = await api.updateProductApi(product.id, product);
+      return updated;
+    }
+    return api.createProduct(product);
+  }
+  return isEditing ? updateProduct(product) : addProduct(product);
+}
+
+export async function removeProduct(id) {
+  if (await api.isApiAvailable() && api.getToken()) {
+    await api.deleteProductApi(id);
+    return true;
+  }
+  return deleteProduct(id);
+}
