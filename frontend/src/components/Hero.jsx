@@ -134,11 +134,21 @@ export default function Hero({ onExploreClick }) {
               fontSize: 'clamp(2.4rem, 5.5vw, 4.5rem)',
               color: '#fff',
               lineHeight: 1.08,
-              marginBottom: '1.8rem',
+              marginBottom: '1.2rem',
               fontWeight: 500,
             }}>
-              MAISON <span className="text-gold">HERITAGE</span>
+              MAISON <span className="text-gold">HERITAGE BY BINT KHALIFA</span>
             </h1>
+            <p style={{
+              fontSize: '0.95rem',
+              color: 'var(--color-accent)',
+              letterSpacing: '0.15em',
+              textTransform: 'uppercase',
+              marginBottom: '1.4rem',
+              fontWeight: 600,
+            }}>
+              Bint Khalifa • Zayel Khalifa • Dibor • Luxe à Dakar
+            </p>
 
             {/* Citation forte */}
             <blockquote style={{

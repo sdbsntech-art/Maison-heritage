@@ -30,6 +30,35 @@ export default function App() {
   const [searchQuery, setSearchQuery] = React.useState('');
   const [selectedCategory, setSelectedCategory] = React.useState('Toutes');
 
+  // SEO dynamique selon l’onglet actif
+  React.useEffect(() => {
+    const titleMap = {
+      home: 'Maison Heritage by Bint Khalifa | Parfums, Montres, Chapelets & Bracelets de Luxe à Dakar',
+      boutique: 'Boutique Maison Heritage by Bint Khalifa | Parfums, Montres & Accessoires de Luxe',
+      apropos: 'À propos de Maison Heritage by Bint Khalifa | Luxe, Authenticité & Dakar',
+      politique: 'Politique de confidentialité | Maison Heritage by Bint Khalifa',
+      contact: 'Contact Maison Heritage by Bint Khalifa | WhatsApp & Livraison au Sénégal',
+      admin: 'Administration Maison Heritage by Bint Khalifa',
+    };
+
+    const descriptionMap = {
+      home: 'Maison Heritage by Bint Khalifa, aussi recherchée sous Bint Khalifa, Zayel Khalifa et Dibor, propose des parfums d’exception, montres, chapelets et bracelets de luxe à Dakar.',
+      boutique: 'Découvrez la boutique Maison Heritage by Bint Khalifa avec des parfums, montres, chapelets et accessoires raffinés à Dakar.',
+      apropos: 'Découvrez l’histoire et l’univers de Maison Heritage by Bint Khalifa, marque de luxe inspirée par l’authenticité et le raffinement.',
+      politique: 'Consultez la politique de confidentialité de Maison Heritage by Bint Khalifa.',
+      contact: 'Contactez Maison Heritage by Bint Khalifa par WhatsApp pour vos commandes et livraisons au Sénégal.',
+      admin: 'Zone d’administration Maison Heritage by Bint Khalifa.',
+    };
+
+    document.title = titleMap[activeTab] || titleMap.home;
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) metaDescription.setAttribute('content', descriptionMap[activeTab] || descriptionMap.home);
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) ogTitle.setAttribute('content', titleMap[activeTab] || titleMap.home);
+    const ogDescription = document.querySelector('meta[property="og:description"]');
+    if (ogDescription) ogDescription.setAttribute('content', descriptionMap[activeTab] || descriptionMap.home);
+  }, [activeTab]);
+
   // Raccourci clavier secret pour le panneau administration
   React.useEffect(() => {
     const handleKeyDown = (e) => {
@@ -236,7 +265,8 @@ export default function App() {
                   </h2>
                   <p>
                     Vous nous avez manqué. Et nous avions tant à vous dire. Je suis <strong style={{ color: 'var(--color-accent)' }}>Bint Khalifa</strong>,
-                    et j'ai le plaisir de vous présenter <strong>Maison Heritage</strong> — un univers 10× plus grand, pensé rien que pour vous.
+                    et j'ai le plaisir de vous présenter <strong>Maison Heritage by Bint Khalifa</strong> — un univers 10× plus grand, pensé rien que pour vous.
+                    Notre boutique est également recherchée sous les noms <strong>Zayel Khalifa</strong> et <strong>Dibor</strong> pour les passionnés de luxe à Dakar et à travers le Sénégal.
                   </p>
                   <div className="welcome-categories">
                     <div className="welcome-cat-item">

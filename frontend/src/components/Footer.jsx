@@ -29,10 +29,10 @@ export default function Footer({ onNavClick, onAdminClick }) {
               textTransform: 'uppercase',
               letterSpacing: '0.05em'
             }}>
-              Maison Heritage
+              Maison Heritage by Bint Khalifa
             </h3>
             <p style={{ color: 'var(--text-muted)', lineHeight: '1.7', marginBottom: '1.5rem' }}>
-              Un univers né de ma passion pour le beau, l’authentique et l’intemporel. Créé par Bint Khalifa pour vous offrir le meilleur de l'élégance.
+              Maison Heritage by Bint Khalifa, également connue sous les noms Bint Khalifa, Zayel Khalifa et Dibor, propose des parfums d'exception, montres, chapelets et bracelets de luxe à Dakar et partout au Sénégal.
             </p>
             <div style={{ display: 'flex', gap: '1rem' }}>
               <span className="text-uppercase-tracking" style={{ fontSize: '0.65rem' }}>
