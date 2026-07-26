@@ -16,17 +16,6 @@ const INITIAL_PRODUCTS = [
     "isPromo": false
   },
   {
-    "id": 2,
-    "name": "Oud Royal Bint Khalifa",
-    "category": "Parfums",
-    "price": 0,
-    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°2.",
-    "imageUrl": "/assets/parfums/dibor_parfum_1.jpg",
-    "isFeatured": true,
-    "inStock": true,
-    "isPromo": false
-  },
-  {
     "id": 3,
     "name": "Elixir Rose de Nuit",
     "category": "Parfums",
@@ -221,28 +210,6 @@ const INITIAL_PRODUCTS = [
     "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°20.",
     "imageUrl": "/assets/parfums/dibor_parfum_20.jpg",
     "isFeatured": false,
-    "inStock": true,
-    "isPromo": false
-  },
-  {
-    "id": 21,
-    "name": "Santal Blanc Prestige",
-    "category": "Parfums",
-    "price": 0,
-    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°21.",
-    "imageUrl": "/assets/parfums/dibor_parfum_18.jpg",
-    "isFeatured": false,
-    "inStock": true,
-    "isPromo": false
-  },
-  {
-    "id": 22,
-    "name": "L'Héritage Oud Gold",
-    "category": "Parfums",
-    "price": 0,
-    "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°22.",
-    "imageUrl": "/assets/parfums/dibor_parfum_19.jpg",
-    "isFeatured": true,
     "inStock": true,
     "isPromo": false
   },
@@ -987,7 +954,7 @@ const INITIAL_PRODUCTS = [
 
 const PRODUCTS_KEY = 'maison_heritage_products';
 const DB_VERSION_KEY = 'maison_heritage_db_version';
-const CURRENT_VERSION = '31.0'; // Forcer la réinitialisation locale
+const CURRENT_VERSION = '32.0'; // Forcer la réinitialisation locale
 
 export const getStoredProducts = () => {
   const storedVersion = localStorage.getItem(DB_VERSION_KEY);
