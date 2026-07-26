@@ -43,7 +43,7 @@ function verifyPassword(password, storedHash) {
 
 // Helper to initialize products
 function getInitialProducts() {
-  return [
+    return [
     {
         "id": 1,
         "name": "Musc Impérial Dibor",
@@ -61,7 +61,7 @@ function getInitialProducts() {
         "category": "Parfums",
         "price": 0,
         "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°2.",
-        "imageUrl": "/assets/parfums/dibor_parfum_2.jpg",
+        "imageUrl": "/assets/parfums/dibor_parfum_1.jpg",
         "isFeatured": true,
         "inStock": true,
         "isPromo": false
@@ -270,7 +270,7 @@ function getInitialProducts() {
         "category": "Parfums",
         "price": 0,
         "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°21.",
-        "imageUrl": "/assets/parfums/dibor_parfum_21.jpg",
+        "imageUrl": "/assets/parfums/dibor_parfum_18.jpg",
         "isFeatured": false,
         "inStock": true,
         "isPromo": false
@@ -281,7 +281,7 @@ function getInitialProducts() {
         "category": "Parfums",
         "price": 0,
         "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°22.",
-        "imageUrl": "/assets/parfums/dibor_parfum_22.jpg",
+        "imageUrl": "/assets/parfums/dibor_parfum_19.jpg",
         "isFeatured": true,
         "inStock": true,
         "isPromo": false
@@ -386,34 +386,12 @@ function getInitialProducts() {
         "isPromo": false
     },
     {
-        "id": 32,
-        "name": "Musc & Oud Dibor N°32",
-        "category": "Parfums",
-        "price": 0,
-        "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°32.",
-        "imageUrl": "/assets/parfums/dibor_parfum_32.jpg",
-        "isFeatured": false,
-        "inStock": true,
-        "isPromo": false
-    },
-    {
         "id": 33,
         "name": "Musc & Oud Dibor N°33",
         "category": "Parfums",
         "price": 0,
         "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°33.",
         "imageUrl": "/assets/parfums/dibor_parfum_33.jpg",
-        "isFeatured": false,
-        "inStock": true,
-        "isPromo": false
-    },
-    {
-        "id": 34,
-        "name": "Musc & Oud Dibor N°34",
-        "category": "Parfums",
-        "price": 0,
-        "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°34.",
-        "imageUrl": "/assets/parfums/dibor_parfum_34.jpg",
         "isFeatured": false,
         "inStock": true,
         "isPromo": false
@@ -430,34 +408,12 @@ function getInitialProducts() {
         "isPromo": false
     },
     {
-        "id": 36,
-        "name": "Musc & Oud Dibor N°36",
-        "category": "Parfums",
-        "price": 0,
-        "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°36.",
-        "imageUrl": "/assets/parfums/dibor_parfum_36.jpg",
-        "isFeatured": false,
-        "inStock": true,
-        "isPromo": false
-    },
-    {
         "id": 37,
         "name": "Musc & Oud Dibor N°37",
         "category": "Parfums",
         "price": 0,
         "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°37.",
         "imageUrl": "/assets/parfums/dibor_parfum_37.jpg",
-        "isFeatured": false,
-        "inStock": true,
-        "isPromo": false
-    },
-    {
-        "id": 38,
-        "name": "Musc & Oud Dibor N°38",
-        "category": "Parfums",
-        "price": 0,
-        "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°38.",
-        "imageUrl": "/assets/parfums/dibor_parfum_38.jpg",
         "isFeatured": false,
         "inStock": true,
         "isPromo": false
@@ -507,17 +463,6 @@ function getInitialProducts() {
         "isPromo": false
     },
     {
-        "id": 43,
-        "name": "Musc & Oud Dibor N°43",
-        "category": "Parfums",
-        "price": 0,
-        "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°43.",
-        "imageUrl": "/assets/parfums/dibor_parfum_43.jpg",
-        "isFeatured": false,
-        "inStock": true,
-        "isPromo": false
-    },
-    {
         "id": 44,
         "name": "Musc & Oud Dibor N°44",
         "category": "Parfums",
@@ -535,72 +480,6 @@ function getInitialProducts() {
         "price": 0,
         "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°45.",
         "imageUrl": "/assets/parfums/dibor_parfum_45.jpg",
-        "isFeatured": false,
-        "inStock": true,
-        "isPromo": false
-    },
-    {
-        "id": 46,
-        "name": "Musc & Oud Dibor N°46",
-        "category": "Parfums",
-        "price": 0,
-        "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°46.",
-        "imageUrl": "/assets/parfums/dibor_parfum_46.jpg",
-        "isFeatured": false,
-        "inStock": true,
-        "isPromo": false
-    },
-    {
-        "id": 47,
-        "name": "Musc & Oud Dibor N°47",
-        "category": "Parfums",
-        "price": 0,
-        "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°47.",
-        "imageUrl": "/assets/parfums/dibor_parfum_47.jpg",
-        "isFeatured": false,
-        "inStock": true,
-        "isPromo": false
-    },
-    {
-        "id": 48,
-        "name": "Musc & Oud Dibor N°48",
-        "category": "Parfums",
-        "price": 0,
-        "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°48.",
-        "imageUrl": "/assets/parfums/dibor_parfum_48.jpg",
-        "isFeatured": false,
-        "inStock": true,
-        "isPromo": false
-    },
-    {
-        "id": 49,
-        "name": "Musc & Oud Dibor N°49",
-        "category": "Parfums",
-        "price": 0,
-        "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°49.",
-        "imageUrl": "/assets/parfums/dibor_parfum_49.jpg",
-        "isFeatured": false,
-        "inStock": true,
-        "isPromo": false
-    },
-    {
-        "id": 50,
-        "name": "Musc & Oud Dibor N°50",
-        "category": "Parfums",
-        "price": 0,
-        "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°50.",
-        "imageUrl": "/assets/parfums/dibor_parfum_50.jpg",
-        "isFeatured": false,
-        "inStock": true,
-        "isPromo": false
-    },
-    {
-        "id": 51,
-        "name": "Musc & Oud Dibor N°51",
-        "category": "Parfums",
-        "price": 0,
-        "description": "Fragrance d'exception Bint Khalifa aux notes Orientales précieuses — N°51.",
-        "imageUrl": "/assets/parfums/dibor_parfum_51.jpg",
         "isFeatured": false,
         "inStock": true,
         "isPromo": false
